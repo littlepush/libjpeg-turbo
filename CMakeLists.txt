@@ -515,14 +515,14 @@ endif()
 
 # Generate files
 if(WIN32)
-  configure_file(win/jconfig.h.in jconfig.h)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/win/jconfig.h.in ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.h)
 else()
-  configure_file(jconfig.h.in jconfig.h)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/jconfig.h.in ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.h)
 endif()
-configure_file(jconfigint.h.in jconfigint.h)
-configure_file(jversion.h.in jversion.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/jconfigint.h.in ${CMAKE_CURRENT_SOURCE_DIR}/jconfigint.h)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/jversion.h.in ${CMAKE_CURRENT_SOURCE_DIR}/jversion.h)
 if(UNIX)
-  configure_file(libjpeg.map.in libjpeg.map)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libjpeg.map.in ${CMAKE_CURRENT_SOURCE_DIR}/libjpeg.map)
 endif()
 
 # Include directories and compiler definitions
@@ -606,7 +606,7 @@ if(WITH_TURBOJPEG)
       set(TJMAPFILE ${CMAKE_CURRENT_SOURCE_DIR}/turbojpeg-mapfile.jni)
     endif()
     if(MSVC)
-      configure_file(${CMAKE_SOURCE_DIR}/win/turbojpeg.rc.in
+      configure_file(${CMAKE_CURRENT_SOURCE_DIR}/win/turbojpeg.rc.in
         ${CMAKE_BINARY_DIR}/win/turbojpeg.rc)
       set(TURBOJPEG_SOURCES ${TURBOJPEG_SOURCES}
         ${CMAKE_BINARY_DIR}/win/turbojpeg.rc)
