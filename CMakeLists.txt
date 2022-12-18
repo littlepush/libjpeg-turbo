@@ -1357,20 +1357,20 @@ endforeach()
 add_custom_target(testclean COMMAND ${CMAKE_COMMAND} -P
   ${CMAKE_CURRENT_SOURCE_DIR}/cmakescripts/testclean.cmake)
 
-configure_file(croptest.in croptest @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/croptest.in ${CMAKE_CURRENT_SOURCE_DIR}/croptest @ONLY)
 add_custom_target(croptest
   COMMAND echo croptest
   COMMAND ${BASH} ${CMAKE_CURRENT_BINARY_DIR}/croptest)
 
 if(WITH_TURBOJPEG)
-  configure_file(tjbenchtest.in tjbenchtest @ONLY)
-  configure_file(tjexampletest.in tjexampletest @ONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/tjbenchtest.in ${CMAKE_CURRENT_SOURCE_DIR}/tjbenchtest @ONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/tjexampletest.in ${CMAKE_CURRENT_SOURCE_DIR}/tjexampletest @ONLY)
   if(WIN32)
     set(BASH bash)
   endif()
   if(WITH_JAVA)
-    configure_file(tjbenchtest.java.in tjbenchtest.java @ONLY)
-    configure_file(tjexampletest.java.in tjexampletest.java @ONLY)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/tjbenchtest.java.in ${CMAKE_CURRENT_SOURCE_DIR}/tjbenchtest.java @ONLY)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/tjexampletest.java.in ${CMAKE_CURRENT_SOURCE_DIR}/tjexampletest.java @ONLY)
     add_custom_target(tjtest
       COMMAND echo tjbenchtest
       COMMAND ${BASH} ${CMAKE_CURRENT_BINARY_DIR}/tjbenchtest

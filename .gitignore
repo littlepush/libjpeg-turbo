@@ -1,3 +1,10 @@
 jconfig.h
 jconfigint.h
 jversion.h
+croptest
+installer.nsi
+pkgscripts/
+tjbenchtest
+tjexampletest
+win/lbrdp-client-serviceTargets-release.cmake
+win/lbrdp-client-serviceTargets.cmake

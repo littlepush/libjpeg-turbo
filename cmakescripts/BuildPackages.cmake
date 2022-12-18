@@ -39,20 +39,20 @@ message(STATUS "RPM architecture = ${RPMARCH}, DEB architecture = ${DEBARCH}")
 # properly
 boolean_number(CMAKE_POSITION_INDEPENDENT_CODE)
 
-configure_file(release/makerpm.in pkgscripts/makerpm)
-configure_file(release/rpm.spec.in pkgscripts/rpm.spec @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/makerpm.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/makerpm)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/rpm.spec.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/rpm.spec @ONLY)
 
 add_custom_target(rpm pkgscripts/makerpm
   SOURCES pkgscripts/makerpm)
 
-configure_file(release/makesrpm.in pkgscripts/makesrpm)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/makesrpm.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/makesrpm)
 
 add_custom_target(srpm pkgscripts/makesrpm
   SOURCES pkgscripts/makesrpm
   DEPENDS dist)
 
-configure_file(release/makedpkg.in pkgscripts/makedpkg)
-configure_file(release/deb-control.in pkgscripts/deb-control)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/makedpkg.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/makedpkg)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/deb-control.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/deb-control)
 
 add_custom_target(deb pkgscripts/makedpkg
   SOURCES pkgscripts/makedpkg)
@@ -98,13 +98,13 @@ endif()
 
 string(REGEX REPLACE "/" "\\\\" INST_DIR ${CMAKE_INSTALL_PREFIX})
 
-configure_file(release/installer.nsi.in installer.nsi @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/installer.nsi.in ${CMAKE_CURRENT_SOURCE_DIR}/installer.nsi @ONLY)
 # TODO: It would be nice to eventually switch to CPack and eliminate this mess,
 # but not today.
-configure_file(win/projectTargets.cmake.in
-  win/${CMAKE_PROJECT_NAME}Targets.cmake @ONLY)
-configure_file(win/${INST_ID}/projectTargets-release.cmake.in
-  win/${CMAKE_PROJECT_NAME}Targets-release.cmake @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/win/projectTargets.cmake.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/win/${CMAKE_PROJECT_NAME}Targets.cmake @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/win/${INST_ID}/projectTargets-release.cmake.in
+  ${CMAKE_CURRENT_SOURCE_DIR}/win/${CMAKE_PROJECT_NAME}Targets-release.cmake @ONLY)
 
 if(WITH_JAVA)
   set(JAVA_DEPEND turbojpeg-java)
@@ -135,10 +135,10 @@ set(MACOS_APP_CERT_NAME "" CACHE STRING
 set(MACOS_INST_CERT_NAME "" CACHE STRING
   "Name of the Developer ID Installer certificate (in the macOS keychain) that should be used to sign the libjpeg-turbo installer package.  Leave this blank to generate an unsigned package.")
 
-configure_file(release/makemacpkg.in pkgscripts/makemacpkg)
-configure_file(release/Distribution.xml.in pkgscripts/Distribution.xml)
-configure_file(release/Welcome.rtf.in pkgscripts/Welcome.rtf)
-configure_file(release/uninstall.in pkgscripts/uninstall)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/makemacpkg.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/makemacpkg)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/Distribution.xml.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/Distribution.xml)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/Welcome.rtf.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/Welcome.rtf)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/uninstall.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/uninstall)
 
 add_custom_target(dmg pkgscripts/makemacpkg
   SOURCES pkgscripts/makemacpkg)
@@ -155,15 +155,15 @@ add_custom_target(dist
     gzip > ${CMAKE_CURRENT_BINARY_DIR}/${CMAKE_PROJECT_NAME}-${VERSION}.tar.gz
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 
-configure_file(release/maketarball.in pkgscripts/maketarball)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/maketarball.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/maketarball)
 
 add_custom_target(tarball pkgscripts/maketarball
   SOURCES pkgscripts/maketarball)
 
-configure_file(release/libjpeg.pc.in pkgscripts/libjpeg.pc @ONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/libjpeg.pc.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/libjpeg.pc @ONLY)
 
 if(WITH_TURBOJPEG)
-  configure_file(release/libturbojpeg.pc.in pkgscripts/libturbojpeg.pc @ONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/release/libturbojpeg.pc.in ${CMAKE_CURRENT_SOURCE_DIR}/pkgscripts/libturbojpeg.pc @ONLY)
 endif()
 
 include(CMakePackageConfigHelpers)
